@@ -175,7 +175,7 @@ function House() {
               {/* <!-- REVIEWS SECTION --> */}
 
               {reviews.map((review, i) => (
-                <div className="border border-1 rounded-2 p-3 mb-3">
+                <div className="border border-1 rounded-2 p-3 mb-3" key={i}>
                   <div className="row">
                     <div className="col-1">
                       <div className="d-inline w-50">
