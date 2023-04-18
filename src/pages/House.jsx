@@ -1,8 +1,6 @@
 import { useState } from 'react'
 
 function House() {
-  const [selectedPhoto, setSelectedPhoto] = useState()
-
   let house = {
     title: 'Luxury Villa in Chaweng',
     description:
@@ -53,6 +51,8 @@ function House() {
     'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_09.png',
   ]
 
+  const [selectedPhoto, setSelectedPhoto] = useState(photos[0])
+
   return (
     <>
       <div className="container">
@@ -62,7 +62,7 @@ function House() {
           <div className="row row-cols-1 row-cols-sm-2 p-0">
             <div className="col">
               <img
-                src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png"
+                src={selectedPhoto}
                 className="img-fluid rounded-3"
                 alt="Focus image"
               />
@@ -70,14 +70,16 @@ function House() {
             <div className="col">
               {/* <!-- THUMBNAIL GRID --> */}
               <div className="row row-cols-3">
-                {/* TEMPLATE START */}
                 {photos.map((photo, i) => (
                   <div className="col my-1" key={i}>
-                    <img src={photo} className="img-thumbnail p-0" alt="..." />
+                    <img
+                      src={photo}
+                      onClick={() => setSelectedPhoto(photo)}
+                      className="img-thumbnail p-0"
+                      alt="..."
+                    />
                   </div>
                 ))}
-
-                {/* TEMPLATE END */}
               </div>
             </div>
           </div>
