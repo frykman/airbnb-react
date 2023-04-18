@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 function House() {
   let house = {
     title: 'Luxury Villa in Chaweng',
@@ -37,16 +39,30 @@ function House() {
       },
     },
   ]
+  let photos = [
+    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png',
+    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_02.png',
+    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_03.png',
+    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_04.png',
+    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_05.png',
+    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_06.png',
+    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_07.png',
+    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_08.png',
+    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_09.png',
+  ]
+
+  const [selectedPhoto, setSelectedPhoto] = useState(photos[0])
 
   return (
     <>
       <div className="container">
+        {/* HOUSE IMAGE GRID START */}
+
         <div className="container p-0 border border-1 mb-3">
           <div className="row row-cols-1 row-cols-sm-2 p-0">
             <div className="col">
               <img
-                src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png
-            "
+                src={selectedPhoto}
                 className="img-fluid rounded-3"
                 alt="Focus image"
               />
@@ -54,80 +70,16 @@ function House() {
             <div className="col">
               {/* <!-- THUMBNAIL GRID --> */}
               <div className="row row-cols-3">
-                <div className="col my-1">
-                  <img
-                    src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png
-                  "
-                    className="img-thumbnail p-0"
-                    alt="..."
-                  />
-                </div>
-                <div className="col my-1">
-                  <img
-                    src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_02.png
-                  "
-                    className="img-thumbnail p-0"
-                    alt="..."
-                  />
-                </div>
-                <div className="col my-1">
-                  <img
-                    src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_03.png
-                  "
-                    className="img-thumbnail p-0"
-                    alt="..."
-                  />
-                </div>
-
-                <div className="col my-1">
-                  <img
-                    src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_04.png
-                  "
-                    className="img-thumbnail p-0"
-                    alt="..."
-                  />
-                </div>
-                <div className="col my-1">
-                  <img
-                    src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_05.png
-                  "
-                    className="img-thumbnail p-0"
-                    alt="..."
-                  />
-                </div>
-                <div className="col my-1">
-                  <img
-                    src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_06.png
-                  "
-                    className="img-thumbnail p-0"
-                    alt="..."
-                  />
-                </div>
-
-                <div className="col my-1">
-                  <img
-                    src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_07.png
-                  "
-                    className="img-thumbnail p-0"
-                    alt="..."
-                  />
-                </div>
-                <div className="col my-1">
-                  <img
-                    src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_08.png
-                  "
-                    className="img-thumbnail p-0"
-                    alt="..."
-                  />
-                </div>
-                <div className="col my-1">
-                  <img
-                    src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_09.png
-                  "
-                    className="img-thumbnail p-0"
-                    alt="..."
-                  />
-                </div>
+                {photos.map((photo, i) => (
+                  <div className="col my-1" key={i}>
+                    <img
+                      src={photo}
+                      onClick={() => setSelectedPhoto(photo)}
+                      className="img-thumbnail p-0"
+                      alt="..."
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
