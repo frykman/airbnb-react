@@ -74,6 +74,7 @@ function Houses() {
 
   return (
     <>
+      {/* HOUSES SEARCH FORM */}
       <div className="bg-light">
         <form className="container text-center">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-6 pt-3">
@@ -149,155 +150,30 @@ function Houses() {
           </div>
         </form>
       </div>
+
+      {/* HOUSES CARDS */}
+
       <div className="container pt-5">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
-          <div className="col card">
-            <a href="house.html" className="stretched-link">
-              <img
-                src={houses[0].image}
-                className="card-img-top"
-                alt="House 1"
-              />
-            </a>
-            <div className="card-body">
-              <span className="card-text">
-                {houses[0].location} - {houses[0].rooms} Rooms
-              </span>
-              <h5 className="card-title">{houses[0].title}</h5>
-              <span className="card-text text-start">
-                {houses[0].reviews} Reviews
-              </span>
-              <span className="card-text text-end">
-                ${houses[0].price}/night
-              </span>
+          {/* TEMPLATE START */}
+          {houses.map((house, i) => (
+            <div className="col card" key={i}>
+              <a href="house.html" className="stretched-link">
+                <img src={house.image} className="card-img-top" alt="House 1" />
+              </a>
+              <div className="card-body">
+                <span className="card-text">
+                  {house.location} - {house.rooms} Rooms
+                </span>
+                <h5 className="card-title">{house.title}</h5>
+                <span className="card-text text-start">
+                  {house.reviews} Reviews
+                </span>
+                <span className="card-text text-end">${house.price}/night</span>
+              </div>
             </div>
-          </div>
-          <div className="col card">
-            <a href="house.html" className="stretched-link">
-              <img
-                src={houses[1].image}
-                className="card-img-top"
-                alt="House 1"
-              />
-            </a>
-            <div className="card-body">
-              <span className="card-text">
-                {houses[1].location} - {houses[1].rooms} Rooms
-              </span>
-              <h5 className="card-title">{houses[1].title}</h5>
-              <span className="card-text text-start">
-                {houses[1].reviews} Reviews
-              </span>
-              <span className="card-text text-end">
-                ${houses[1].price}/night
-              </span>
-            </div>
-          </div>
-          <div className="col card">
-            <a href="house.html" className="stretched-link">
-              <img
-                src={houses[2].image}
-                className="card-img-top"
-                alt="House 1"
-              />
-            </a>
-            <div className="card-body">
-              <span className="card-text">
-                {houses[2].location} - {houses[2].rooms} Rooms
-              </span>
-              <h5 className="card-title">{houses[2].title}</h5>
-              <span className="card-text text-start">
-                {houses[2].reviews} Reviews
-              </span>
-              <span className="card-text text-end">
-                ${houses[2].price}/night
-              </span>
-            </div>
-          </div>
-          <div className="col card">
-            <a href="house.html" className="stretched-link">
-              <img
-                src={houses[3].image}
-                className="card-img-top"
-                alt="House 1"
-              />
-            </a>
-            <div className="card-body">
-              <span className="card-text">
-                {houses[3].location} - {houses[3].rooms} Rooms
-              </span>
-              <h5 className="card-title">{houses[3].title}</h5>
-              <span className="card-text text-start">
-                {houses[3].reviews} Reviews
-              </span>
-              <span className="card-text text-end">
-                ${houses[3].price}/night
-              </span>
-            </div>
-          </div>
-          <div className="col card">
-            <a href="house.html" className="stretched-link">
-              <img
-                src={houses[4].image}
-                className="card-img-top"
-                alt="House 1"
-              />
-            </a>
-            <div className="card-body">
-              <span className="card-text">
-                {houses[4].location} - {houses[4].rooms} Rooms
-              </span>
-              <h5 className="card-title">{houses[4].title}</h5>
-              <span className="card-text text-start">
-                {houses[4].reviews} Reviews
-              </span>
-              <span className="card-text text-end">
-                ${houses[4].price}/night
-              </span>
-            </div>
-          </div>
-          <div className="col card">
-            <a href="house.html" className="stretched-link">
-              <img
-                src={houses[5].image}
-                className="card-img-top"
-                alt="House 1"
-              />
-            </a>
-            <div className="card-body">
-              <span className="card-text">
-                {houses[5].location} - {houses[5].rooms} Rooms
-              </span>
-              <h5 className="card-title">{houses[5].title}</h5>
-              <span className="card-text text-start">
-                {houses[5].reviews} Reviews
-              </span>
-              <span className="card-text text-end">
-                ${houses[5].price}/night
-              </span>
-            </div>
-          </div>
-          <div className="col card">
-            <a href="house.html" className="stretched-link">
-              <img
-                src={houses[6].image}
-                className="card-img-top"
-                alt="House 1"
-              />
-            </a>
-            <div className="card-body">
-              <span className="card-text">
-                {houses[6].location} - {houses[6].rooms} Rooms
-              </span>
-              <h5 className="card-title">{houses[6].title}</h5>
-              <span className="card-text text-start">
-                {houses[6].reviews} Reviews
-              </span>
-              <span className="card-text text-end">
-                ${houses[6].price}/night
-              </span>
-            </div>
-          </div>
+          ))}
+          {/* TEMPLATE END */}
         </div>
       </div>
     </>
