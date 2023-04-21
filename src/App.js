@@ -20,7 +20,7 @@ function App() {
         </Route>
         <Route element={<WithNav />}>
           <Route path="/houses" element={<Houses />} />
-          <Route path="/house" element={<House />} />
+          <Route path="/house/:id" element={<House />} />
           <Route path="/housecreate" element={<HouseCreate />} />
           <Route path="/houseedit" element={<HouseEdit />} />
           <Route path="/profile" element={<Profile />} />
