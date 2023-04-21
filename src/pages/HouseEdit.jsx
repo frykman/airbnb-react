@@ -2,28 +2,28 @@ function HouseEdit() {
   return (
     <>
       {/* <!-- EDIT HOUSE LISTING --> */}
-      <div class="container">
+      <div className="container">
         <form>
           <h1>Edit House</h1>
 
-          <div class="mb-3">
+          <div className="mb-3">
             <h5>Short Title</h5>
-            <input type="text" class="form-control" />
+            <input type="text" className="form-control" />
           </div>
 
-          <div class="floatingTextarea mb-3">
+          <div className="floatingTextarea mb-3">
             <h5>Description</h5>
-            <textarea rows="8" class="form-control"></textarea>
+            <textarea rows="8" className="form-control"></textarea>
           </div>
 
-          <div class="mb-3">
+          <div className="mb-3">
             <h5>Number of Rooms</h5>
-            <input type="number" class="form-control mb-3" />
+            <input type="number" className="form-control mb-3" />
           </div>
 
-          <div class="mb-3">
+          <div className="mb-3">
             <h5>Location</h5>
-            <select class="form-select" id="inputGroupSelect01">
+            <select className="form-select" id="inputGroupSelect01">
               <option selected>Choose...</option>
               <option value="1">One</option>
               <option value="2">Two</option>
@@ -31,129 +31,133 @@ function HouseEdit() {
             </select>
           </div>
 
-          <div class="mb-3">
+          <div className="mb-3">
             <h5>Price (per night)</h5>
-            <div class="input-group">
-              <span class="input-group-text" id="basic-addon1">
+            <div className="input-group">
+              <span className="input-group-text" id="basic-addon1">
                 €
               </span>
-              <input type="number" class="form-control" />
+              <input type="number" className="form-control" />
             </div>
           </div>
 
-          <div class="mb-3">
+          <div className="mb-3">
             <h5>Add Photos (up to 9)</h5>
           </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon3">
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon3">
               https://
             </span>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="basic-url"
               aria-describedby="basic-addon3"
             />
           </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon3">
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon3">
               https://
             </span>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="basic-url"
               aria-describedby="basic-addon3"
             />
           </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon3">
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon3">
               https://
             </span>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="basic-url"
               aria-describedby="basic-addon3"
             />
           </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon3">
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon3">
               https://
             </span>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="basic-url"
               aria-describedby="basic-addon3"
             />
           </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon3">
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon3">
               https://
             </span>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="basic-url"
               aria-describedby="basic-addon3"
             />
           </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon3">
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon3">
               https://
             </span>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="basic-url"
               aria-describedby="basic-addon3"
             />
           </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon3">
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon3">
               https://
             </span>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="basic-url"
               aria-describedby="basic-addon3"
             />
           </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon3">
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon3">
               https://
             </span>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="basic-url"
               aria-describedby="basic-addon3"
             />
           </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon3">
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon3">
               https://
             </span>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="basic-url"
               aria-describedby="basic-addon3"
             />
           </div>
 
-          <div class="input-group mb-3">
+          <div className="input-group mb-3">
             <input
-              class="btn btn-success btn-lg"
+              className="btn btn-success btn-lg"
               type="submit"
               value="Save Changes"
             />
           </div>
 
-          <div class="input-group mb-3">
-            <input class="btn btn-danger btn-lg" type="submit" value="Delete" />
+          <div className="input-group mb-3">
+            <input
+              className="btn btn-danger btn-lg"
+              type="submit"
+              value="Delete"
+            />
           </div>
         </form>
       </div>
