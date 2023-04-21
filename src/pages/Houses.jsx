@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function Houses() {
   let houses = [
     {
@@ -158,9 +160,9 @@ function Houses() {
           {/* TEMPLATE START */}
           {houses.map((house, i) => (
             <div className="col card" key={i}>
-              <a href="house.html" className="stretched-link">
+              <Link to="/house" className="stretched-link">
                 <img src={house.image} className="card-img-top" alt="House 1" />
-              </a>
+              </Link>
               <div className="card-body">
                 <span className="card-text">
                   {house.location} - {house.rooms} Rooms

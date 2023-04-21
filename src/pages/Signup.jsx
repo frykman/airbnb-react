@@ -1,6 +1,11 @@
+import { Link } from 'react-router-dom'
+
 function Signup() {
   return (
-    <div className="d-flex justify-content-center p-5 mt-5 w-auto">
+    <div
+      className="d-flex justify-content-center p-5 mt-5 w-auto"
+      id="background"
+    >
       <form className="bg-light p-5 justify-content-center rounded-3 w-25">
         <img
           src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1642399114/portal/web%20development%20beginners/05%20Project%20Airbnb/assets/logo-airbnb.png
@@ -19,9 +24,9 @@ function Signup() {
           Signup
         </button>
         <span>Already have an account?</span>
-        <a href="login.html" className="px-2 link-success text-decoration-none">
+        <Link to="/login" className="px-2 link-success text-decoration-none">
           Login
-        </a>
+        </Link>
       </form>
     </div>
   )
