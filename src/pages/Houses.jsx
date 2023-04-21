@@ -74,6 +74,8 @@ function Houses() {
     },
   ]
 
+  let searchResult = []
+
   const sendForm = (e) => {
     e.preventDefault()
     let searchQueryObj = {}
@@ -81,8 +83,8 @@ function Houses() {
       searchQueryObj[str] = val
     }
     setValue('location', e.target.location.value)
-    setValue('rooms', e.target.rooms.value)
-    setValue('maxprice', e.target.maxprice.value)
+    setValue('rooms', Number(e.target.rooms.value))
+    setValue('maxprice', Number(e.target.maxprice.value))
     setValue('location', e.target.location.value)
     setValue('pricesort', e.target.pricesort.value)
     setValue('housename', e.target.housename.value)
@@ -107,9 +109,9 @@ function Houses() {
                   defaultValue={0}
                 >
                   <option value="0">Any Location</option>
-                  <option value="1">Koh Phangan</option>
-                  <option value="2">Koh Samui</option>
-                  <option value="3">Bali</option>
+                  <option value="koh-phangan">Koh Phangan</option>
+                  <option value="koh-samui">Koh Samui</option>
+                  <option value="bali">Bali</option>
                 </select>
               </div>
             </div>
@@ -156,8 +158,8 @@ function Houses() {
                   name="pricesort"
                   defaultValue={1}
                 >
-                  <option value="1">Price (low to high)</option>
-                  <option value="2">Price (high to low)</option>
+                  <option value="ascending">Price (low to high)</option>
+                  <option value="descending">Price (high to low)</option>
                 </select>
               </div>
             </div>
@@ -183,6 +185,7 @@ function Houses() {
       <div className="container pt-5">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
           {/* TEMPLATE START */}
+
           {houses.map((house, i) => (
             <div className="col card" key={i}>
               <Link to={`/house/${i}`} className="stretched-link">
@@ -200,6 +203,7 @@ function Houses() {
               </div>
             </div>
           ))}
+
           {/* TEMPLATE END */}
         </div>
       </div>

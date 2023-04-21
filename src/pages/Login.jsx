@@ -14,9 +14,12 @@ function Login() {
           <input type="email" className="form-control mb-3 w-100" />
           <label>Password</label>
           <input type="password" className="form-control mb-3" />
-          <button type="submit" className="d-block mb-3 btn btn-success">
-            Login
-          </button>
+          <Link to="/houses" className="px-2 link-success text-decoration-none">
+            <button type="submit" className="d-block mb-3 btn btn-success">
+              Login
+            </button>
+          </Link>
+
           <span>New to Airbnb?</span>
           <Link to="/" className="px-2 link-success text-decoration-none">
             Signup

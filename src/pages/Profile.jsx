@@ -1,4 +1,10 @@
 function Profile() {
+  let currentUser = {
+    name: '',
+    email: '',
+    avatar: '',
+  }
+
   return (
     // <!-- PROFILE/LISTINGS START -->
     <div className="container">
