@@ -4,10 +4,12 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import House from './pages/House'
+import Nav from './components/Nav'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
+    <Nav />
     <House />
   </React.StrictMode>
 )

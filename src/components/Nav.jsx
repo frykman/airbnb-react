@@ -1,4 +1,4 @@
-function Nav() {
+export default function Nav() {
   return (
     <>
       <div class="container">
