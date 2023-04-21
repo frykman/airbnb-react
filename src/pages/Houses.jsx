@@ -74,11 +74,26 @@ function Houses() {
     },
   ]
 
+  const sendForm = (e) => {
+    e.preventDefault()
+    let searchQueryObj = {}
+    const setValue = (str, val) => {
+      searchQueryObj[str] = val
+    }
+    setValue('location', e.target.location.value)
+    setValue('rooms', e.target.rooms.value)
+    setValue('maxprice', e.target.maxprice.value)
+    setValue('location', e.target.location.value)
+    setValue('pricesort', e.target.pricesort.value)
+    setValue('housename', e.target.housename.value)
+    console.log(searchQueryObj)
+  }
+
   return (
     <>
       {/* HOUSES SEARCH FORM */}
       <div className="bg-light">
-        <form className="container text-center">
+        <form onSubmit={(e) => sendForm(e)} className="container text-center">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-6 pt-3">
             <div className="col">
               <div className="input-group mb-3">
@@ -86,10 +101,12 @@ function Houses() {
                   <i className="fa-solid fa-location-dot"></i>
                 </span>
                 <select
+                  name="location"
                   className="form-select form-select-md"
                   aria-label=".form-select-md example"
+                  defaultValue={0}
                 >
-                  <option selected>Any Location</option>
+                  <option value="0">Any Location</option>
                   <option value="1">Koh Phangan</option>
                   <option value="2">Koh Samui</option>
                   <option value="3">Bali</option>
@@ -102,10 +119,12 @@ function Houses() {
                   <i className="fa-solid fa-house"></i>
                 </span>
                 <select
+                  name="rooms"
                   className="form-select form-select-md"
                   aria-label=".form-select-md example"
+                  defaultValue={0}
                 >
-                  <option selected>Any rooms</option>
+                  <option value="0">Any rooms</option>
                   <option value="1">1 room</option>
                   <option value="2">2 rooms</option>
                   <option value="3">3 rooms</option>
@@ -120,6 +139,7 @@ function Houses() {
                   <i className="fa-solid fa-euro-sign"></i>
                 </span>
                 <input
+                  name="maxprice"
                   type="number"
                   className="form-control form-control-md"
                   placeholder="350$"
@@ -131,14 +151,19 @@ function Houses() {
                 <span className="input-group-text" id="basic-addon1">
                   <i className="fa-solid fa-sort"></i>
                 </span>
-                <select className="form-control form-select-md">
-                  <option selected>Price (low to high)</option>
-                  <option value="1">Price (high to low)</option>
+                <select
+                  className="form-control form-select-md"
+                  name="pricesort"
+                  defaultValue={1}
+                >
+                  <option value="1">Price (low to high)</option>
+                  <option value="2">Price (high to low)</option>
                 </select>
               </div>
             </div>
             <div className="col">
               <input
+                name="housename"
                 className="form-control form-control-md mb-3"
                 type="text"
                 placeholder="House name..."
