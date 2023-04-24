@@ -33,12 +33,12 @@ function HouseCreate() {
 
   return (
     <div className="container">
-      <form onSubmit={(e) => sendForm(e)} className="">
+      <form onSubmit={(e) => sendForm(e)}>
         <h1>List a House</h1>
 
         <div className="mb-3">
           <h5>Short Title</h5>
-          <input type="text" className="form-control" name="title" />
+          <input name="title" type="text" className="form-control" />
         </div>
 
         <div className="floatingTextarea mb-3">
@@ -53,7 +53,7 @@ function HouseCreate() {
 
         <div className="mb-3">
           <h5>Number of Rooms</h5>
-          <input type="number" className="form-control mb-3" name="rooms" />
+          <input name="rooms" type="number" className="form-control mb-3" />
         </div>
 
         <div className="mb-3">
