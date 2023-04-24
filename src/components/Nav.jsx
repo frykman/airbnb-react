@@ -38,7 +38,7 @@ export default function Nav() {
                       className="rounded-circle d-inline w-25 m-0"
                     />
                   </div>
-                  Mikael
+                  <div className="d-inline-flex text-end">Mikael</div>
                 </button>
               </Link>
               <Link to="/login">

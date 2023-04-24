@@ -74,8 +74,6 @@ function Houses() {
     },
   ]
 
-  let searchResult = []
-
   const sendForm = (e) => {
     e.preventDefault()
     let searchQueryObj = {}
@@ -172,7 +170,10 @@ function Houses() {
               />
             </div>
             <div className="col">
-              <button className="form-control form-select-md btn-success">
+              <button
+                type="submit"
+                className="form-control form-select-md btn-success"
+              >
                 Search
               </button>
             </div>
@@ -196,10 +197,14 @@ function Houses() {
                   {house.location} - {house.rooms} Rooms
                 </span>
                 <h5 className="card-title">{house.title}</h5>
-                <span className="card-text text-start">
-                  {house.reviews} Reviews
-                </span>
-                <span className="card-text text-end">${house.price}/night</span>
+                <div className="row">
+                  <div className="col text-start">
+                    <span className="card-text">{house.reviews} Reviews</span>
+                  </div>
+                  <div className="col text-end">
+                    <span className="card-text">${house.price}/night</span>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
