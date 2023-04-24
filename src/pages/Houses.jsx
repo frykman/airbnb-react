@@ -80,12 +80,19 @@ function Houses() {
     const setValue = (str, val) => {
       searchQueryObj[str] = val
     }
-    setValue('location', e.target.location.value)
-    setValue('rooms', Number(e.target.rooms.value))
-    setValue('maxprice', Number(e.target.maxprice.value))
-    setValue('location', e.target.location.value)
+    !Number(e.target.rooms.value)
+      ? null
+      : setValue('rooms', Number(e.target.rooms.value))
+    !e.target.maxprice.value
+      ? null
+      : setValue('maxprice', Number(e.target.maxprice.value))
+    !e.target.location.value
+      ? null
+      : setValue('location', e.target.location.value)
     setValue('pricesort', e.target.pricesort.value)
-    setValue('housename', e.target.housename.value)
+    !e.target.housename.value
+      ? null
+      : setValue('housename', e.target.housename.value)
     console.log(searchQueryObj)
   }
 
@@ -104,9 +111,8 @@ function Houses() {
                   name="location"
                   className="form-select form-select-md"
                   aria-label=".form-select-md example"
-                  defaultValue={0}
                 >
-                  <option value="0">Any Location</option>
+                  <option value="">Any Location</option>
                   <option value="koh-phangan">Koh Phangan</option>
                   <option value="koh-samui">Koh Samui</option>
                   <option value="bali">Bali</option>

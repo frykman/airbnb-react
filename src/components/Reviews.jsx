@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 function Reviews() {
   let reviews = [
     {
@@ -21,24 +23,36 @@ function Reviews() {
       },
     },
   ]
+
+  let review = {}
+
+  let [rating, setRating] = useState(0)
+
+  const sendForm = (e) => {
+    e.preventDefault()
+    const setValue = (str, val) => {
+      review[str] = val
+    }
+
+    !rating ? null : setValue('rating', rating)
+
+    !e.target.body.value ? null : setValue('body', e.target.body.value)
+
+    console.log(review)
+  }
+
   return (
     <>
       <h5>Leave a review</h5>
-      <form>
+      <form onSubmit={(e) => sendForm(e)}>
         <div className="floatingTextarea">
           <textarea
+            name="body"
+            type="text"
             rows="5"
             className="form-control"
             placeholder="Review"
           ></textarea>
-        </div>
-        <div className="d-flex align-items-baseline my-3">
-          <div className="border border-1 rounded-2 p-2">
-            <i className="fa-solid fa-thumbs-up fs-4 me-2 text-success"></i>
-          </div>
-          <div className="border border-1 rounded-2 p-2">
-            <i className="fa-solid fa-thumbs-down fs-4 me-2 text-danger"></i>
-          </div>
         </div>
         <div className="d-block mb-3">
           <button
@@ -49,6 +63,24 @@ function Reviews() {
           </button>
         </div>
       </form>
+      <div className="d-flex align-items-baseline my-3">
+        <div className="border border-1 rounded-2 p-2">
+          <button onClick={() => setRating(1)}>
+            <i
+              name="rating"
+              className="fa-solid fa-thumbs-up fs-4 me-2 text-success"
+            ></i>
+          </button>
+        </div>
+        <div className="border border-1 rounded-2 p-2">
+          <button onClick={() => setRating(-1)}>
+            <i
+              name="rating"
+              className="fa-solid fa-thumbs-down fs-4 me-2 text-danger"
+            ></i>
+          </button>
+        </div>
+      </div>
 
       {/* <!-- REVIEWS SECTION --> */}
 
