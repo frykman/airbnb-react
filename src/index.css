@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#avatar-div {
+  position: relative;
+}
+
+#nav-avater {
+  position: absolute;
+}
+
+#background {
+  background-image: url('https://res.cloudinary.com/dsko6ntfj/image/upload/v1642399115/portal/web%20development%20beginners/05%20Project%20Airbnb/assets/thailand.jpg');
+  background-size: cover;
+  background-position: 0 0 0 200px;
+}

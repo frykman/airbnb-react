@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useState, useParams } from 'react'
 import Reviews from '../components/Reviews'
 import Booking from '../components/Booking'
 
 function House() {
+  //will be used with axios to get house with id from database (let house = axios.get bla bla) and setHouse(house) as state variable, then populate.
+  // house/${id} in template literal
+
   let house = {
     title: 'Luxury Villa in Chaweng',
     description:
@@ -36,10 +39,9 @@ function House() {
 
   return (
     <>
-      <div className="container">
-        {/* HOUSE IMAGE GRID START */}
-
-        <div className="container p-0 border border-1 mb-3">
+      {/* HOUSE IMAGE GRID START */}
+      <div className="container pt-3">
+        <div className="container p-0 border border-1 pb-3">
           <div className="row row-cols-1 row-cols-sm-2 p-0">
             <div className="col">
               <img
@@ -69,7 +71,7 @@ function House() {
 
         {/* <!-- HOUSE INFO GRID START --> */}
         <div className="container">
-          <div className="row">
+          <div className="row mt-3">
             <div className="col-8">
               <h1>{house.title}</h1>
               <span>

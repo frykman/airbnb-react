@@ -8,20 +8,34 @@ function HouseCreate() {
     const setValue = (str, val) => {
       newListing[str] = val
     }
-    setValue('title', e.target.title.value)
-    setValue('description', e.target.description.value)
+    !e.target.title.value
+      ? console.log('You need a title')
+      : setValue('title', e.target.title.value)
+
+    !e.target.description.value
+      ? console.log('You need a description')
+      : setValue('description', e.target.description.value)
+
     setValue('rooms', Number(e.target.rooms.value))
-    setValue('location', e.target.location.value)
-    setValue('price', Number(e.target.price.value))
-    setValue('photo1', e.target.photo1.value)
-    setValue('photo2', e.target.photo2.value)
-    setValue('photo3', e.target.photo3.value)
-    setValue('photo4', e.target.photo4.value)
-    setValue('photo5', e.target.photo5.value)
-    setValue('photo6', e.target.photo6.value)
-    setValue('photo7', e.target.photo7.value)
-    setValue('photo8', e.target.photo8.value)
-    setValue('photo9', e.target.photo9.value)
+    !e.target.location.value
+      ? console.log('You need to set a location')
+      : setValue('location', e.target.location.value)
+
+    !e.target.price.value
+      ? console.log('You need to set a price')
+      : setValue('price', Number(e.target.price.value))
+
+    !e.target.photo1.value
+      ? console.log('You need at least 1 photo')
+      : setValue('photo1', e.target.photo1.value)
+    !e.target.photo2.value ? null : setValue('photo2', e.target.photo2.value)
+    !e.target.photo3.value ? null : setValue('photo3', e.target.photo3.value)
+    !e.target.photo4.value ? null : setValue('photo4', e.target.photo4.value)
+    !e.target.photo5.value ? null : setValue('photo5', e.target.photo5.value)
+    !e.target.photo6.value ? null : setValue('photo6', e.target.photo6.value)
+    !e.target.photo7.value ? null : setValue('photo7', e.target.photo7.value)
+    !e.target.photo8.value ? null : setValue('photo8', e.target.photo8.value)
+    !e.target.photo9.value ? null : setValue('photo9', e.target.photo9.value)
     console.log(newListing)
 
     // axios.post('/user/listings', newListing).then(function (response) {
@@ -34,7 +48,7 @@ function HouseCreate() {
   return (
     <div className="container">
       <form onSubmit={(e) => sendForm(e)}>
-        <h1>List a House</h1>
+        <h1>List House</h1>
 
         <div className="mb-3">
           <h5>Short Title</h5>

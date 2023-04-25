@@ -195,7 +195,7 @@ function Houses() {
 
           {houses.map((house, i) => (
             <div className="col card" key={i}>
-              <Link to={`/house/${i}`} className="stretched-link">
+              <Link to={`/houses/${i}`} className="stretched-link">
                 <img src={house.image} className="card-img-top" alt="House 1" />
               </Link>
               <div className="card-body">

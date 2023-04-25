@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import '../styles/Nav.css'
 
 export default function Nav() {
   return (
@@ -6,7 +7,7 @@ export default function Nav() {
       <div className="container pb-2">
         <nav className="navbar navbar-light">
           <div className="col-1">
-            <Link to="/houses">
+            <Link to="/">
               <img
                 src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1642399114/portal/web%20development%20beginners/05%20Project%20Airbnb/assets/logo-airbnb.png
             "
@@ -32,13 +33,17 @@ export default function Nav() {
                   className="btn btn-outline-success me-2 px-0 mb-0"
                   type="submit"
                 >
-                  <div className="col d-inline">
+                  <div
+                    className="col d-inline position-relative"
+                    id="avatar-div"
+                  >
                     <img
+                      id="nav-avatar"
                       src="https://randomuser.me/api/portraits/men/11.jpg"
-                      className="rounded-circle d-inline w-25 m-0"
+                      className="rounded-circle d-inline w-50 m-0 position-absolute"
                     />
+                    <span className="d-inline-flex text-end px-3">Mikael</span>
                   </div>
-                  <div className="d-inline-flex text-end">Mikael</div>
                 </button>
               </Link>
               <Link to="/login">

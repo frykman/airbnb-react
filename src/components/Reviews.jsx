@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
 function Reviews() {
+  let [rating, setRating] = useState(0)
+
   let reviews = [
     {
       date: '02 Jan 2022 - 1:01',
@@ -25,8 +27,6 @@ function Reviews() {
   ]
 
   let review = {}
-
-  let [rating, setRating] = useState(0)
 
   const sendForm = (e) => {
     e.preventDefault()
@@ -57,7 +57,7 @@ function Reviews() {
         <div className="d-block mb-3">
           <button
             type="submit"
-            className="btn-success rounded-2 d-block p-1 w-50"
+            className="btn-success rounded-2 d-block mt-3 p-1 w-50"
           >
             <h5 className="mx-3">Submit</h5>
           </button>
