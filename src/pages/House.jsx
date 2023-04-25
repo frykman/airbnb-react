@@ -1,8 +1,11 @@
-import { useState, useParams } from 'react'
+import { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import Reviews from '../components/Reviews'
 import Booking from '../components/Booking'
 
 function House() {
+  const { id } = useParams()
+
   //will be used with axios to get house with id from database (let house = axios.get bla bla) and setHouse(house) as state variable, then populate.
   // house/${id} in template literal
 

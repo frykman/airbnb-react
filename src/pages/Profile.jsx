@@ -1,34 +1,21 @@
 import Listings from '../components/Listings'
 
 function Profile() {
-  let currentUser = {
+  let user = {
     name: 'Mikael',
     email: 'mikael.frykman@gmail.com',
     avatar: 'coolpic.com/photo',
   }
 
-  let houseListings = [
-    // {
-    //   image:
-    //     'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png',
-    //   title: 'Luxury Villa in Chaweng',
-    //   location: 'Koh Samui',
-    //   rooms: '4',
-    //   price: '350',
-    //   description:
-    //     'Stylish, tropical, luxurious, airy and absolute stunning view over the bay of Chaweng Beach, this villa combines form and function, enjoying magnificent views of Samuis small islands and the sea beyond.',
-    // },
-  ]
-
   const updateProfile = (e) => {
     e.preventDefault()
     const setValue = (str, val) => {
-      currentUser[str] = val
+      user[str] = val
     }
     setValue('name', e.target.name.value)
     setValue('email', e.target.email.value)
     setValue('avatar', e.target.avatar.value)
-    console.log(currentUser)
+    console.log(user)
   }
 
   return (
@@ -44,14 +31,14 @@ function Profile() {
             <input
               type="text"
               className="form-control mb-3 w-100"
-              defaultValue={currentUser.name}
+              defaultValue={user.name}
               name="name"
             />
             <label>Email</label>
             <input
               type="email"
               className="form-control mb-3 w-100"
-              defaultValue={currentUser.email}
+              defaultValue={user.email}
               name="email"
             />
             <label>Profile Picture</label>
@@ -69,7 +56,7 @@ function Profile() {
                 name="avatar"
                 id="basic-url"
                 aria-describedby="basic-addon3"
-                defaultValue={currentUser.avatar}
+                defaultValue={user.avatar}
               />
             </div>
             <button type="submit" className="btn btn-success">

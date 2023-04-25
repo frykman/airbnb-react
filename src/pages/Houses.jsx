@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
 function Houses() {
   let houses = [
     {
+      id: '988uas89da',
       image:
         'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png',
       title: 'Luxury Villa in Chaweng',
@@ -13,6 +14,7 @@ function Houses() {
       score: 1,
     },
     {
+      id: '988sd8f74j',
       image:
         'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295027/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2002/house_02_01.png',
       title: 'Private Villa Lotus 1',
@@ -23,6 +25,7 @@ function Houses() {
       score: 1,
     },
     {
+      id: '94hf6d7r4f',
       image:
         'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295027/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2003/house_03_01.png',
       title: 'Seminyak KuDeTa Beach',
@@ -33,6 +36,7 @@ function Houses() {
       score: -1,
     },
     {
+      id: '98883jf7da',
       image:
         'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295027/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2004/house_04_01.png',
       title: '5 Bed Villa Canggu',
@@ -43,6 +47,7 @@ function Houses() {
       score: 1,
     },
     {
+      id: '6hfufgas42',
       image:
         'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295027/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2005/house_05_01.png',
       title: 'Archie Village House',
@@ -53,6 +58,7 @@ function Houses() {
       score: 1,
     },
     {
+      id: '8gh47fy586',
       image:
         'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295027/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2006/house_06_01.png',
       title: 'Luxury 6 Beds Villa',
@@ -63,6 +69,7 @@ function Houses() {
       score: 1,
     },
     {
+      id: '7g56y49rut',
       image:
         'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295027/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2007/house_07_01.png',
       title: 'Narivana Koh Phangan',
@@ -195,7 +202,7 @@ function Houses() {
 
           {houses.map((house, i) => (
             <div className="col card" key={i}>
-              <Link to={`/houses/${i}`} className="stretched-link">
+              <Link to={`/house/${house.id}`} className="stretched-link">
                 <img src={house.image} className="card-img-top" alt="House 1" />
               </Link>
               <div className="card-body">
