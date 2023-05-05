@@ -40,7 +40,7 @@ export default function Nav() {
                     <img
                       id="nav-avatar"
                       src="https://randomuser.me/api/portraits/men/11.jpg"
-                      className="rounded-circle d-inline w-50 m-0 position-absolute"
+                      className="rounded-circle d-inline w-50 m-0 position-absolute nav-avatar"
                     />
                     <span className="d-inline-flex text-end px-3">Mikael</span>
                   </div>

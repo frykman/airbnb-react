@@ -1,106 +1,42 @@
-import { useParams, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 function Houses() {
-  let houses = [
-    {
-      id: '988uas89da',
-      image:
-        'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png',
-      title: 'Luxury Villa in Chaweng',
-      price: 350,
-      location: 'Koh Samui',
-      rooms: 4,
-      reviews: 3,
-      score: 1,
-    },
-    {
-      id: '988sd8f74j',
-      image:
-        'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295027/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2002/house_02_01.png',
-      title: 'Private Villa Lotus 1',
-      price: 150,
-      location: 'Koh Phangan',
-      rooms: 3,
-      reviews: 1,
-      score: 1,
-    },
-    {
-      id: '94hf6d7r4f',
-      image:
-        'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295027/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2003/house_03_01.png',
-      title: 'Seminyak KuDeTa Beach',
-      price: 120,
-      location: 'Bali',
-      rooms: 3,
-      reviews: 2,
-      score: -1,
-    },
-    {
-      id: '98883jf7da',
-      image:
-        'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295027/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2004/house_04_01.png',
-      title: '5 Bed Villa Canggu',
-      price: 250,
-      location: 'Bali',
-      rooms: 5,
-      reviews: 1,
-      score: 1,
-    },
-    {
-      id: '6hfufgas42',
-      image:
-        'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295027/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2005/house_05_01.png',
-      title: 'Archie Village House',
-      price: 80,
-      location: 'Koh Phangan',
-      rooms: 2,
-      reviews: 1,
-      score: 1,
-    },
-    {
-      id: '8gh47fy586',
-      image:
-        'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295027/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2006/house_06_01.png',
-      title: 'Luxury 6 Beds Villa',
-      price: 150,
-      location: 'Koh Phangan',
-      rooms: 6,
-      reviews: 0,
-      score: 1,
-    },
-    {
-      id: '7g56y49rut',
-      image:
-        'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295027/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2007/house_07_01.png',
-      title: 'Narivana Koh Phangan',
-      price: 100,
-      location: 'Koh Phangan',
-      rooms: 4,
-      reviews: 0,
-      score: 1,
-    },
-  ]
+  let [houses, setHouses] = useState([])
 
-  const sendForm = (e) => {
+  useEffect(() => {
+    const getHouses = async () => {
+      let response = await axios.get('http://localhost:4000/houses', {
+        params: {
+          rooms: '0',
+          pricesort: 'ascending',
+        },
+      })
+      setHouses(response.data)
+    }
+    getHouses()
+  }, [])
+
+  const sendForm = async (e) => {
     e.preventDefault()
     let searchQueryObj = {}
     const setValue = (str, val) => {
       searchQueryObj[str] = val
     }
-    !Number(e.target.rooms.value)
-      ? null
-      : setValue('rooms', Number(e.target.rooms.value))
-    !e.target.maxprice.value
-      ? null
-      : setValue('maxprice', Number(e.target.maxprice.value))
+    !e.target.rooms.value ? null : setValue('rooms', e.target.rooms.value)
+    !e.target.price.value ? null : setValue('price', e.target.price.value)
     !e.target.location.value
       ? null
       : setValue('location', e.target.location.value)
     setValue('pricesort', e.target.pricesort.value)
-    !e.target.housename.value
-      ? null
-      : setValue('housename', e.target.housename.value)
+    !e.target.title.value ? null : setValue('title', e.target.title.value)
+
+    let response = await axios.get('http://localhost:4000/houses', {
+      params: searchQueryObj,
+    })
     console.log(searchQueryObj)
+    setHouses(response.data)
   }
 
   return (
@@ -141,8 +77,8 @@ function Houses() {
                   <option value="1">1 room</option>
                   <option value="2">2 rooms</option>
                   <option value="3">3 rooms</option>
-                  <option value="3">4 rooms</option>
-                  <option value="3">5 rooms</option>
+                  <option value="4">4 rooms</option>
+                  <option value="5">5 rooms</option>
                 </select>
               </div>
             </div>
@@ -152,7 +88,7 @@ function Houses() {
                   <i className="fa-solid fa-euro-sign"></i>
                 </span>
                 <input
-                  name="maxprice"
+                  name="price"
                   type="number"
                   className="form-control form-control-md"
                   placeholder="350$"
@@ -176,10 +112,10 @@ function Houses() {
             </div>
             <div className="col">
               <input
-                name="housename"
+                name="title"
                 className="form-control form-control-md mb-3"
                 type="text"
-                placeholder="House name..."
+                placeholder="House title..."
               />
             </div>
             <div className="col">
@@ -200,27 +136,37 @@ function Houses() {
         <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
           {/* TEMPLATE START */}
 
-          {houses.map((house, i) => (
-            <div className="col card" key={i}>
-              <Link to={`/house/${house.id}`} className="stretched-link">
-                <img src={house.image} className="card-img-top" alt="House 1" />
-              </Link>
-              <div className="card-body">
-                <span className="card-text">
-                  {house.location} - {house.rooms} Rooms
-                </span>
-                <h5 className="card-title">{house.title}</h5>
-                <div className="row">
-                  <div className="col text-start">
-                    <span className="card-text">{house.reviews} Reviews</span>
-                  </div>
-                  <div className="col text-end">
-                    <span className="card-text">${house.price}/night</span>
+          {!Array.isArray(houses) ? (
+            <div>
+              <h4>No results</h4>
+            </div>
+          ) : (
+            houses.map((house, i) => (
+              <div className="col card" key={i}>
+                <Link to={`/house/${house.id}`} className="stretched-link">
+                  <img
+                    src={house.photos[0]}
+                    className="card-img-top"
+                    alt="House"
+                  />
+                </Link>
+                <div className="card-body">
+                  <span className="card-text">
+                    {house.location} - {house.rooms} Rooms
+                  </span>
+                  <h5 className="card-title">{house.title}</h5>
+                  <div className="row">
+                    <div className="col text-start">
+                      <span className="card-text">{house.reviews} Reviews</span>
+                    </div>
+                    <div className="col text-end">
+                      <span className="card-text">${house.price}/night</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
 
           {/* TEMPLATE END */}
         </div>

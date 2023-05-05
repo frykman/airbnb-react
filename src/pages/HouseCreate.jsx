@@ -1,9 +1,11 @@
-// import axios from 'axios'
+import axios from 'axios'
+
+axios.defaults.withCredentials = true
 
 function HouseCreate() {
   let newListing = {}
 
-  const sendForm = (e) => {
+  const sendForm = async (e) => {
     e.preventDefault()
     const setValue = (str, val) => {
       newListing[str] = val
@@ -36,7 +38,9 @@ function HouseCreate() {
     !e.target.photo7.value ? null : setValue('photo7', e.target.photo7.value)
     !e.target.photo8.value ? null : setValue('photo8', e.target.photo8.value)
     !e.target.photo9.value ? null : setValue('photo9', e.target.photo9.value)
-    console.log(newListing)
+
+    let response = await axios.post('http://localhost:4000/houses', newListing)
+    console.log(response)
 
     // axios.post('/user/listings', newListing).then(function (response) {
     //   console.log(response)}).catch(function (error) {
@@ -51,7 +55,7 @@ function HouseCreate() {
         <h1>List House</h1>
 
         <div className="mb-3">
-          <h5>Short Title</h5>
+          <h5>Short title</h5>
           <input name="title" type="text" className="form-control" />
         </div>
 
@@ -79,9 +83,9 @@ function HouseCreate() {
             defaultValue={0}
           >
             <option value="0">Choose...</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="Koh Phangan">One</option>
+            <option value="Koh Samui">Two</option>
+            <option value="Bali">Three</option>
           </select>
         </div>
 

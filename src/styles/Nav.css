@@ -1,12 +1,8 @@
-#avatar-div {
-  position: relative;
-}
-
-#nav-avater {
-  position: absolute;
-}
-
 .position-absolute {
   right: 85px;
   top: -8px;
+}
+
+.nav-avatar {
+  border: 2px green solid;
 }

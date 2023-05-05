@@ -5,7 +5,7 @@ function Listings() {
     // {
     //   image:
     //     'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png',
-    //   title: 'Luxury Villa in Chaweng',
+    //   name: 'Luxury Villa in Chaweng',
     //   location: 'Koh Samui',
     //   rooms: '4',
     //   price: '350',
@@ -43,7 +43,7 @@ function Listings() {
 
                 <div className="col-8">
                   <div className="card-body">
-                    <h5 className="card-title">{house.title}</h5>
+                    <h5 className="card-name">{house.name}</h5>
                     <div className="mb-3">
                       <small className="text-muted">
                         {house.rooms} rooms - {house.price}€/night

@@ -10,7 +10,7 @@ function House() {
   // house/${id} in template literal
 
   let house = {
-    title: 'Luxury Villa in Chaweng',
+    name: 'Luxury Villa in Chaweng',
     description:
       'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores blanditiis error, quia ex eos neque odit pariatur ducimus non nam deleniti. Odio, quasi. Accusamus similique commodi natus molestias a maxime!',
     price: 350,
@@ -76,7 +76,7 @@ function House() {
         <div className="container">
           <div className="row mt-3">
             <div className="col-8">
-              <h1>{house.title}</h1>
+              <h1>{house.name}</h1>
               <span>
                 {house.location} - {house.rooms} Rooms
               </span>

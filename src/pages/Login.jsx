@@ -1,7 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import axios from 'axios'
+
+axios.defaults.withCredentials = true
 
 function Login() {
+  const navigate = useNavigate()
   let [emailToValidate, setEmailToValidate] = useState('')
 
   useEffect(() => {
@@ -16,15 +20,15 @@ function Login() {
   let validatedEmail = ''
 
   const validEmail = (str) => {
-    if (!str.includes('@') && !str.includes('.')) return false
-    if (!str.split('@')[0].length) return false
-    if (!str.split('@')[1].includes('.')) return false
-    if (str.split('@')[1].split('.')[1].length < 2) return false
-    if (!str.split('@')[1].split('.')[0]) return false
+    // if (!str.includes('@') && !str.includes('.')) return false
+    // if (!str.split('@')[0].length) return false
+    // if (!str.split('@')[1].includes('.')) return false
+    // if (str.split('@')[1].split('.')[1].length < 2) return false
+    // if (!str.split('@')[1].split('.')[0]) return false
     return true
   }
 
-  const loginForm = (e, str) => {
+  const loginForm = async (e) => {
     e.preventDefault()
     const setValue = (str, val) => {
       userObj[str] = val
@@ -32,11 +36,16 @@ function Login() {
     setValue('email', validatedEmail)
     setValue('password', e.target.password.value)
 
-    console.log(userObj)
+    let response = await axios.post('http://localhost:4000/login', userObj)
+    console.log(response)
+    console.log(response.data.message)
+    if (response.data.message === 'Login success') {
+      navigate('/')
+    }
   }
 
   return (
-    <div className="container justify-content-center p-5 mt-5 w-25">
+    <div className="container justify-content-center p-5 mt-5 w-md-25 w-75">
       <form
         onSubmit={(e) => loginForm(e)}
         className="bg-light p-5 justify-content-center rounded-3 "

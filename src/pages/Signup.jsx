@@ -1,7 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import axios from 'axios'
+
+axios.defaults.withCredentials = true
 
 function Signup() {
+  const navigate = useNavigate()
   let [emailToValidate, setEmailToValidate] = useState('')
 
   useEffect(() => {
@@ -24,8 +28,9 @@ function Signup() {
     return true
   }
 
-  const signupForm = (e) => {
+  const signupForm = async (e) => {
     e.preventDefault()
+
     const setValue = (str, val) => {
       userObj[str] = val
     }
@@ -34,21 +39,26 @@ function Signup() {
       ? console.log('Enter name!')
       : setValue('name', e.target.name.value)
 
-    setValue('avatar', e.target.avatar.value)
+    !e.target.avatar.value ? null : setValue('avatar', e.target.avatar.value)
     setValue('email', validatedEmail)
 
     e.target.password.value < 8 // Make password validation
       ? console.log('Password must be over 8 characters')
       : setValue('password', e.target.password.value)
 
-    console.log(userObj)
+    let response = await axios.post('http://localhost:4000/signup', userObj)
+    console.log(response)
+
+    if (response.data.message === 'Signup success! You are now logged in.') {
+      navigate('/')
+    }
   }
 
   return (
     <div className="d-flex justify-content-center p-5 mt-5 w-auto" id="">
       <form
         onSubmit={(e) => signupForm(e)}
-        className="bg-light p-5 justify-content-center rounded-3 w-25"
+        className="bg-light p-5 justify-content-center rounded-3 w-md-25 w-75"
       >
         <img
           src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1642399114/portal/web%20development%20beginners/05%20Project%20Airbnb/assets/logo-airbnb.png

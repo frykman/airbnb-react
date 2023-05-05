@@ -37,7 +37,7 @@ function HouseEdit() {
           <h1>Edit House</h1>
 
           <div className="mb-3">
-            <h5>Short Title</h5>
+            <h5>Short title</h5>
             <input name="title" type="text" className="form-control" />
           </div>
 
