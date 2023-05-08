@@ -1,18 +1,18 @@
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 function Listings() {
-  let houseListings = [
-    // {
-    //   image:
-    //     'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png',
-    //   name: 'Luxury Villa in Chaweng',
-    //   location: 'Koh Samui',
-    //   rooms: '4',
-    //   price: '350',
-    //   description:
-    //     'Stylish, tropical, luxurious, airy and absolute stunning view over the bay of Chaweng Beach, this villa combines form and function, enjoying magnificent views of Samuis small islands and the sea beyond.',
-    // },
-  ]
+  useEffect(() => {
+    const getListings = async () => {
+      let response = await axios.get('http://localhost:4000/listings')
+      setHouseListings(response.data)
+      console.log(response.data)
+    }
+    getListings()
+  }, [])
+
+  const [houseListings, setHouseListings] = useState([])
 
   return (
     <>
@@ -29,13 +29,13 @@ function Listings() {
         {!houseListings.length && (
           <h5 className="text-secondary">You don't have any houses listed.</h5>
         )}
-        {houseListings.length > 0 &&
+        {Array.isArray(houseListings) &&
           houseListings.map((house, i) => (
             <div className="card mb-3" key={i}>
               <div className="row g-0">
                 <div className="col-4">
                   <img
-                    src={house.image}
+                    src={house.photos[0]}
                     className="img-fluid rounded-start"
                     alt="..."
                   />
@@ -50,7 +50,7 @@ function Listings() {
                       </small>
                     </div>
 
-                    <p className="card-text">{house.description}</p>
+                    <p className="card-text">{house.title}</p>
                     <div>
                       <button className="btn btn-outline-secondary">
                         Edit

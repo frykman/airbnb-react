@@ -1,13 +1,19 @@
 import Listings from '../components/Listings'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 function Profile() {
-  let user = {
-    name: 'Mikael',
-    email: 'mikael.frykman@gmail.com',
-    avatar: 'coolpic.com/photo',
-  }
+  useEffect(() => {
+    const getProfile = async () => {
+      let response = await axios.get('http://localhost:4000/profile')
+      setUser(response.data)
+    }
+    getProfile()
+  }, [])
 
-  const updateProfile = (e) => {
+  const [user, setUser] = useState({})
+
+  const updateProfile = async (e) => {
     e.preventDefault()
     const setValue = (str, val) => {
       user[str] = val
@@ -15,7 +21,7 @@ function Profile() {
     setValue('name', e.target.name.value)
     setValue('email', e.target.email.value)
     setValue('avatar', e.target.avatar.value)
-    console.log(user)
+    await axios.patch('http://localhost:4000/profile', user)
   }
 
   return (

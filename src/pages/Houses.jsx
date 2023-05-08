@@ -56,8 +56,8 @@ function Houses() {
                   aria-label=".form-select-md example"
                 >
                   <option value="">Any Location</option>
-                  <option value="koh-phangan">Koh Phangan</option>
-                  <option value="koh-samui">Koh Samui</option>
+                  <option value="koh phangan">Koh Phangan</option>
+                  <option value="koh samui">Koh Samui</option>
                   <option value="bali">Bali</option>
                 </select>
               </div>
@@ -135,21 +135,23 @@ function Houses() {
       <div className="container pt-5">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
           {/* TEMPLATE START */}
-
-          {!Array.isArray(houses) ? (
+          {!houses && (
             <div>
               <h4>No results</h4>
             </div>
-          ) : (
+          )}
+          {houses &&
             houses.map((house, i) => (
               <div className="col card" key={i}>
-                <Link to={`/house/${house.id}`} className="stretched-link">
-                  <img
-                    src={house.photos[0]}
-                    className="card-img-top"
-                    alt="House"
-                  />
-                </Link>
+                <div className="mh-100">
+                  <Link to={`/house/${house._id}`} className="stretched-link">
+                    <img
+                      src={house.photos[0]}
+                      className="card-img-top object-fit-fill"
+                      alt="House"
+                    />
+                  </Link>
+                </div>
                 <div className="card-body">
                   <span className="card-text">
                     {house.location} - {house.rooms} Rooms
@@ -165,9 +167,7 @@ function Houses() {
                   </div>
                 </div>
               </div>
-            ))
-          )}
-
+            ))}
           {/* TEMPLATE END */}
         </div>
       </div>

@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom'
 import '../styles/Nav.css'
+import axios from 'axios'
 
 export default function Nav() {
+  const logout = async (e) => {
+    let response = await axios.get('http://localhost:4000/logout')
+    console.log(response.data)
+  }
   return (
     <>
       <div className="container pb-2">
@@ -47,7 +52,11 @@ export default function Nav() {
                 </button>
               </Link>
               <Link to="/login">
-                <button className="btn btn-outline-success px-4" type="submit">
+                <button
+                  onClick={(e) => logout(e)}
+                  className="btn btn-outline-success px-4"
+                  type="submit"
+                >
                   Logout
                 </button>
               </Link>

@@ -4,6 +4,7 @@ axios.defaults.withCredentials = true
 
 function HouseCreate() {
   let newListing = {}
+  let photos = []
 
   const sendForm = async (e) => {
     e.preventDefault()
@@ -29,15 +30,16 @@ function HouseCreate() {
 
     !e.target.photo1.value
       ? console.log('You need at least 1 photo')
-      : setValue('photo1', e.target.photo1.value)
-    !e.target.photo2.value ? null : setValue('photo2', e.target.photo2.value)
-    !e.target.photo3.value ? null : setValue('photo3', e.target.photo3.value)
-    !e.target.photo4.value ? null : setValue('photo4', e.target.photo4.value)
-    !e.target.photo5.value ? null : setValue('photo5', e.target.photo5.value)
-    !e.target.photo6.value ? null : setValue('photo6', e.target.photo6.value)
-    !e.target.photo7.value ? null : setValue('photo7', e.target.photo7.value)
-    !e.target.photo8.value ? null : setValue('photo8', e.target.photo8.value)
-    !e.target.photo9.value ? null : setValue('photo9', e.target.photo9.value)
+      : photos.push(e.target.photo1.value)
+    !e.target.photo2.value ? null : photos.push(e.target.photo2.value)
+    !e.target.photo3.value ? null : photos.push(e.target.photo3.value)
+    !e.target.photo4.value ? null : photos.push(e.target.photo4.value)
+    !e.target.photo5.value ? null : photos.push(e.target.photo5.value)
+    !e.target.photo6.value ? null : photos.push(e.target.photo6.value)
+    !e.target.photo7.value ? null : photos.push(e.target.photo7.value)
+    !e.target.photo8.value ? null : photos.push(e.target.photo8.value)
+    !e.target.photo9.value ? null : photos.push(e.target.photo9.value)
+    setValue('photos', photos)
 
     let response = await axios.post('http://localhost:4000/houses', newListing)
     console.log(response)
@@ -83,9 +85,9 @@ function HouseCreate() {
             defaultValue={0}
           >
             <option value="0">Choose...</option>
-            <option value="Koh Phangan">One</option>
-            <option value="Koh Samui">Two</option>
-            <option value="Bali">Three</option>
+            <option value="Koh Phangan">Koh Phangan</option>
+            <option value="Koh Samui">Koh Samui</option>
+            <option value="Bali">Bali</option>
           </select>
         </div>
 

@@ -1,44 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Reviews from '../components/Reviews'
 import Booking from '../components/Booking'
+import axios from 'axios'
 
 function House() {
   const { id } = useParams()
+  const [house, setHouse] = useState({})
+  const [selectedPhoto, setSelectedPhoto] = useState()
 
-  //will be used with axios to get house with id from database (let house = axios.get bla bla) and setHouse(house) as state variable, then populate.
-  // house/${id} in template literal
-
-  let house = {
-    name: 'Luxury Villa in Chaweng',
-    description:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores blanditiis error, quia ex eos neque odit pariatur ducimus non nam deleniti. Odio, quasi. Accusamus similique commodi natus molestias a maxime!',
-    price: 350,
-    booking: false,
-    location: 'Koh Samui',
-    rooms: 4,
-    rating: 1,
-    photos: [],
-    host: {
-      name: 'Bob',
-      avatar:
-        'https://res.cloudinary.com/dsko6ntfj/image/upload/v1642399114/portal/web%20development%20beginners/05%20Project%20Airbnb/assets/logo-airbnb.png',
-    },
-  }
-
-  let photos = [
-    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png',
-    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_02.png',
-    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_03.png',
-    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_04.png',
-    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_05.png',
-    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_06.png',
-    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_07.png',
-    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_08.png',
-    'https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295019/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_09.png',
-  ]
-
-  const [selectedPhoto, setSelectedPhoto] = useState(photos[0])
+  useEffect(() => {
+    const getHouse = async () => {
+      let response = await axios.get(`http://localhost:4000/houses/${id}`)
+      setHouse(response.data)
+      setSelectedPhoto(response.data.photos[0])
+    }
+    getHouse()
+  }, [])
 
   return (
     <>
@@ -56,16 +34,17 @@ function House() {
             <div className="col">
               {/* <!-- THUMBNAIL GRID --> */}
               <div className="row row-cols-3">
-                {photos.map((photo, i) => (
-                  <div className="col my-1" key={i}>
-                    <img
-                      src={photo}
-                      onClick={() => setSelectedPhoto(photo)}
-                      className="img-thumbnail p-0"
-                      alt="..."
-                    />
-                  </div>
-                ))}
+                {Array.isArray(house.photos) &&
+                  house.photos.map((photo, i) => (
+                    <div className="col my-1" key={i}>
+                      <img
+                        src={photo}
+                        onClick={() => setSelectedPhoto(photo)}
+                        className="img-thumbnail p-0"
+                        alt="..."
+                      />
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
@@ -83,12 +62,12 @@ function House() {
               <p>{house.description}</p>
 
               {/* <!-- REVIEW TEXTAREA --> */}
-              <Reviews />
+              <Reviews houseid={id} />
             </div>
             {/* <!-- INFO/REVIEW COLUMN END --> */}
 
             {/* <!-- BOOKING REQUEST COLUMN --> */}
-            <Booking />
+            <Booking houseid={id} />
           </div>
         </div>
       </div>
