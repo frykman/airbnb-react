@@ -24,11 +24,11 @@ function Login() {
   let validatedEmail = ''
 
   const validEmail = (str) => {
-    // if (!str.includes('@') && !str.includes('.')) return false
-    // if (!str.split('@')[0].length) return false
-    // if (!str.split('@')[1].includes('.')) return false
-    // if (str.split('@')[1].split('.')[1].length < 2) return false
-    // if (!str.split('@')[1].split('.')[0]) return false
+    if (!str.includes('@') && !str.includes('.')) return false
+    if (!str.split('@')[0].length) return false
+    if (!str.split('@')[1].includes('.')) return false
+    if (str.split('@')[1].split('.')[1].length < 2) return false
+    if (!str.split('@')[1].split('.')[0]) return false
     return true
   }
 
@@ -76,11 +76,9 @@ function Login() {
               type="password"
               className="form-control mb-3"
             />
-            {/* <Link to="/houses" className="px-2 link-success text-decoration-none"> */}
             <button type="submit" className="d-block mb-3 btn btn-success">
               Login
             </button>
-            {/* </Link> */}
 
             <span>New to Airbnb?</span>
             <Link

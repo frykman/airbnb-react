@@ -3,7 +3,7 @@ import axios from 'axios'
 import moment from 'moment/moment'
 
 function Reviews(props) {
-  let [rating, setRating] = useState(0)
+  const [rating, setRating] = useState(0)
   const [reviews, setReviews] = useState([])
 
   useEffect(() => {
@@ -14,7 +14,7 @@ function Reviews(props) {
     let response = await axios.get('http://localhost:4000/reviews', {
       params: { house: props.houseid },
     })
-    setReviews(response.data)
+    setReviews(response.data.reviews)
   }
 
   const sendForm = async (e) => {
@@ -59,20 +59,26 @@ function Reviews(props) {
         </div>
       </form>
       <div className="d-flex align-items-baseline my-3">
-        <div className="border border-1 rounded-2 p-2">
-          <button onClick={() => setRating(1)}>
-            <i
-              name="rating"
-              className="fa-solid fa-thumbs-up fs-4 me-2 text-success"
-            ></i>
+        <div className="rounded-2 p-2">
+          <button
+            onClick={() => setRating(1)}
+            type="button"
+            className="btn btn-labeled btn-success"
+          >
+            <span className="btn-label">
+              <i className="fa fa-thumbs-up"></i>
+            </span>
           </button>
         </div>
-        <div className="border border-1 rounded-2 p-2">
-          <button onClick={() => setRating(-1)}>
-            <i
-              name="rating"
-              className="fa-solid fa-thumbs-down fs-4 me-2 text-danger"
-            ></i>
+        <div className=" rounded-2 p-2">
+          <button
+            onClick={() => setRating(-1)}
+            type="button"
+            className="btn btn-labeled btn-danger"
+          >
+            <span className="btn-label">
+              <i className="fa fa-thumbs-down"></i>
+            </span>
           </button>
         </div>
       </div>
@@ -80,31 +86,39 @@ function Reviews(props) {
       {/* <!-- REVIEWS SECTION --> */}
 
       {reviews &&
-        reviews.map((review, i) => (
-          <div className="border border-1 rounded-2 p-3 mb-3" key={i}>
-            <div className="row">
-              <div className="col-1">
-                <div className="d-inline w-50">
-                  <img
-                    src={review.author.avatar}
-                    alt=""
-                    className="img-fluid rounded-circle"
-                  />
+        reviews
+          .slice(0)
+          .reverse()
+          .map((review, i) => (
+            <div className="border border-1 rounded-2 p-3 mb-3" key={i}>
+              <div className="row">
+                <div className="col-1">
+                  <div className="d-inline w-50">
+                    <img
+                      src={review.author.avatar}
+                      alt=""
+                      className="img-fluid rounded-circle"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="col-10 position-relative">
-                <div className="position-absolute top-0 end-0">
-                  <i className="fa-solid fa-thumbs-up fs-4 me-2 text-success"></i>
+                <div className="col-10 position-relative">
+                  <div className="position-absolute top-0 end-0">
+                    {review.rating && review.rating == 1 && (
+                      <i className="fa-solid fa-thumbs-up fs-4 me-2 text-success"></i>
+                    )}
+                    {review.rating && review.rating == -1 && (
+                      <i className="fa-solid fa-thumbs-down fs-4 me-2 text-danger"></i>
+                    )}
+                  </div>
+                  <span className="text-secondary">
+                    {moment(review.date).format('MMMM Do YYYY, h:mm')}
+                  </span>
+                  <h5>{review.author.name}</h5>
+                  <p>{review.description}</p>
                 </div>
-                <span className="text-secondary">
-                  {moment(review.date).format('MMMM Do YYYY, h:mm')}
-                </span>
-                <h5>{review.author.name}</h5>
-                <p>{review.description}</p>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
     </>
   )
 }

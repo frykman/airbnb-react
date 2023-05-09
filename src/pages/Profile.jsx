@@ -49,7 +49,7 @@ function Profile() {
             />
             <label>Profile Picture</label>
             <img
-              src="https://randomuser.me/api/portraits/men/11.jpg"
+              src={user.avatar}
               className="rounded-circle d-block pt-3 pb-3"
             />
             <div className="input-group mb-3">

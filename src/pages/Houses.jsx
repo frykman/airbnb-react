@@ -50,16 +50,12 @@ function Houses() {
                 <span className="input-group-text">
                   <i className="fa-solid fa-location-dot"></i>
                 </span>
-                <select
+                <input
                   name="location"
-                  className="form-select form-select-md"
-                  aria-label=".form-select-md example"
-                >
-                  <option value="">Any Location</option>
-                  <option value="koh phangan">Koh Phangan</option>
-                  <option value="koh samui">Koh Samui</option>
-                  <option value="bali">Bali</option>
-                </select>
+                  type="text"
+                  className="form-control form-control-md"
+                  placeholder="Location"
+                />
               </div>
             </div>
             <div className="col">
@@ -134,7 +130,6 @@ function Houses() {
 
       <div className="container pt-5">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
-          {/* TEMPLATE START */}
           {!houses && (
             <div>
               <h4>No results</h4>
@@ -147,7 +142,7 @@ function Houses() {
                   <Link to={`/house/${house._id}`} className="stretched-link">
                     <img
                       src={house.photos[0]}
-                      className="card-img-top object-fit-fill"
+                      className="card-img-top img-fluid object-fit-fill"
                       alt="House"
                     />
                   </Link>
@@ -168,7 +163,6 @@ function Houses() {
                 </div>
               </div>
             ))}
-          {/* TEMPLATE END */}
         </div>
       </div>
     </>
