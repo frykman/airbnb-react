@@ -52,9 +52,11 @@ function Listings() {
 
                     <p className="card-text">{house.title}</p>
                     <div>
-                      <button className="btn btn-outline-secondary">
-                        Edit
-                      </button>
+                      <Link to="/houseedit">
+                        <button className="btn btn-outline-secondary">
+                          Edit
+                        </button>
+                      </Link>
                       <button className="btn btn-outline-success">View</button>
                     </div>
                   </div>

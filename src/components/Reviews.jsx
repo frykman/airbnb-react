@@ -3,12 +3,15 @@ import axios from 'axios'
 import moment from 'moment/moment'
 
 function Reviews(props) {
+  //States
   const [rating, setRating] = useState(0)
   const [reviews, setReviews] = useState([])
+  const [currentUser, setCurrentUser] = useState(0)
 
-  useEffect(() => {
-    getReviews()
-  }, [])
+  const getCurrentUser = async () => {
+    let user = await axios.get('http://localhost:4000/profile')
+    setCurrentUser(user.data)
+  }
 
   const getReviews = async () => {
     let response = await axios.get('http://localhost:4000/reviews', {
@@ -36,53 +39,61 @@ function Reviews(props) {
     getReviews()
   }
 
+  useEffect(() => {
+    getReviews()
+    getCurrentUser()
+  }, [])
+
   return (
     <>
-      <h5>Leave a review</h5>
-      <form onSubmit={(e) => sendForm(e)}>
-        <div className="floatingTextarea">
-          <textarea
-            name="description"
-            type="text"
-            rows="5"
-            className="form-control"
-            placeholder="Review"
-          ></textarea>
+      {currentUser.name && (
+        <div>
+          <h5>Leave a review</h5>
+          <form onSubmit={(e) => sendForm(e)}>
+            <div className="floatingTextarea">
+              <textarea
+                name="description"
+                type="text"
+                rows="5"
+                className="form-control"
+                placeholder="Review"
+              ></textarea>
+            </div>
+            <div className="d-block mb-3">
+              <button
+                type="submit"
+                className="btn-success rounded-2 d-block mt-3 p-1 w-50"
+              >
+                <h5 className="mx-3">Submit</h5>
+              </button>
+            </div>
+          </form>
+          <div className="d-flex align-items-baseline my-3">
+            <div className="rounded-2 p-2">
+              <button
+                onClick={() => setRating(1)}
+                type="button"
+                className="btn btn-labeled btn-success"
+              >
+                <span className="btn-label">
+                  <i className="fa fa-thumbs-up"></i>
+                </span>
+              </button>
+            </div>
+            <div className=" rounded-2 p-2">
+              <button
+                onClick={() => setRating(-1)}
+                type="button"
+                className="btn btn-labeled btn-danger"
+              >
+                <span className="btn-label">
+                  <i className="fa fa-thumbs-down"></i>
+                </span>
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="d-block mb-3">
-          <button
-            type="submit"
-            className="btn-success rounded-2 d-block mt-3 p-1 w-50"
-          >
-            <h5 className="mx-3">Submit</h5>
-          </button>
-        </div>
-      </form>
-      <div className="d-flex align-items-baseline my-3">
-        <div className="rounded-2 p-2">
-          <button
-            onClick={() => setRating(1)}
-            type="button"
-            className="btn btn-labeled btn-success"
-          >
-            <span className="btn-label">
-              <i className="fa fa-thumbs-up"></i>
-            </span>
-          </button>
-        </div>
-        <div className=" rounded-2 p-2">
-          <button
-            onClick={() => setRating(-1)}
-            type="button"
-            className="btn btn-labeled btn-danger"
-          >
-            <span className="btn-label">
-              <i className="fa fa-thumbs-down"></i>
-            </span>
-          </button>
-        </div>
-      </div>
-
+      )}
       {/* <!-- REVIEWS SECTION --> */}
 
       {reviews &&
@@ -94,11 +105,19 @@ function Reviews(props) {
               <div className="row">
                 <div className="col-1">
                   <div className="d-inline w-50">
-                    <img
-                      src={review.author.avatar}
-                      alt=""
-                      className="img-fluid rounded-circle"
-                    />
+                    {!review.author.avatar && (
+                      <img
+                        src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
+                        className="img-fluid rounded-circle"
+                      />
+                    )}
+                    {review.author.avatar && (
+                      <img
+                        src={review.author.avatar}
+                        alt=""
+                        className="img-fluid rounded-circle"
+                      />
+                    )}
                   </div>
                 </div>
                 <div className="col-10 position-relative">

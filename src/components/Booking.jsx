@@ -71,7 +71,7 @@ function Booking(props) {
           </div>
           {booked == true && <h5>You have placed a booking for this house</h5>}
 
-          {booked == false && (
+          {booked == false && currentUser.name && (
             <form onSubmit={(e) => sendBooking(e)}>
               <div className="">
                 <textarea
@@ -92,7 +92,7 @@ function Booking(props) {
               </div>
             </form>
           )}
-          {currentUser == 0 && (
+          {!currentUser.name && (
             <span className="text-danger">
               Log in to make a booking request.
             </span>

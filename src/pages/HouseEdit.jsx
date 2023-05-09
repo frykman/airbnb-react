@@ -1,32 +1,60 @@
 function HouseEdit() {
   let editedListing = {}
 
-  const sendForm = (e) => {
+  const sendForm = async (e) => {
     e.preventDefault()
     const setValue = (str, val) => {
       editedListing[str] = val
     }
-    setValue('title', e.target.title.value)
-    setValue('description', e.target.description.value)
-    setValue('rooms', Number(e.target.rooms.value))
-    setValue('location', e.target.location.value)
-    setValue('price', Number(e.target.price.value))
-    setValue('photo1', e.target.photo1.value)
-    setValue('photo2', e.target.photo2.value)
-    setValue('photo3', e.target.photo3.value)
-    setValue('photo4', e.target.photo4.value)
-    setValue('photo5', e.target.photo5.value)
-    setValue('photo6', e.target.photo6.value)
-    setValue('photo7', e.target.photo7.value)
-    setValue('photo8', e.target.photo8.value)
-    setValue('photo9', e.target.photo9.value)
-    console.log(editedListing)
+    !e.target.title.value
+      ? setErrorMessage('You need a title.')
+      : setValue('title', e.target.title.value)
 
-    // axios.patch('/user/listings', editedListing).then(function (response) {
-    //   console.log(response)}).catch(function (error) {
-    //     console.log(error);
-    //   }
-    // )
+    !e.target.description.value
+      ? setErrorMessage('You need a description')
+      : setValue('description', e.target.description.value)
+
+    setValue('rooms', Number(e.target.rooms.value))
+    !e.target.location.value
+      ? setErrorMessage('You need to set a location')
+      : setValue('location', e.target.location.value)
+
+    !e.target.price.value
+      ? setErrorMessage('You need to set a price')
+      : setValue('price', Number(e.target.price.value))
+
+    !e.target.photo1.value
+      ? setErrorMessage('You need at least 1 photo')
+      : photos.push(e.target.photo1.value)
+    !e.target.photo2.value ? null : photos.push(e.target.photo2.value)
+    !e.target.photo3.value ? null : photos.push(e.target.photo3.value)
+    !e.target.photo4.value ? null : photos.push(e.target.photo4.value)
+    !e.target.photo5.value ? null : photos.push(e.target.photo5.value)
+    !e.target.photo6.value ? null : photos.push(e.target.photo6.value)
+    !e.target.photo7.value ? null : photos.push(e.target.photo7.value)
+    !e.target.photo8.value ? null : photos.push(e.target.photo8.value)
+    !e.target.photo9.value ? null : photos.push(e.target.photo9.value)
+    setValue('photos', photos)
+
+    if (
+      editedListing.title &&
+      editedListing.description &&
+      editedListing.rooms &&
+      editedListing.location &&
+      editedListing.price &&
+      editedListing.photos[0]
+    ) {
+      let response = await axios.patch(
+        'http://localhost:4000/houses',
+        editedListing
+      )
+
+      if (response.data.message && response.data.message == 'House listed!') {
+        navigate('/profile')
+      }
+    } else {
+      console.log('House not listed')
+    }
   }
 
   return (

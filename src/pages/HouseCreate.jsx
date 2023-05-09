@@ -1,10 +1,15 @@
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 axios.defaults.withCredentials = true
 
 function HouseCreate() {
+  const [errorMessage, setErrorMessage] = useState('')
+
   let newListing = {}
   let photos = []
+  const navigate = useNavigate()
 
   const sendForm = async (e) => {
     e.preventDefault()
@@ -12,24 +17,24 @@ function HouseCreate() {
       newListing[str] = val
     }
     !e.target.title.value
-      ? console.log('You need a title')
+      ? setErrorMessage('You need a title.')
       : setValue('title', e.target.title.value)
 
     !e.target.description.value
-      ? console.log('You need a description')
+      ? setErrorMessage('You need a description')
       : setValue('description', e.target.description.value)
 
     setValue('rooms', Number(e.target.rooms.value))
     !e.target.location.value
-      ? console.log('You need to set a location')
+      ? setErrorMessage('You need to set a location')
       : setValue('location', e.target.location.value)
 
     !e.target.price.value
-      ? console.log('You need to set a price')
+      ? setErrorMessage('You need to set a price')
       : setValue('price', Number(e.target.price.value))
 
     !e.target.photo1.value
-      ? console.log('You need at least 1 photo')
+      ? setErrorMessage('You need at least 1 photo')
       : photos.push(e.target.photo1.value)
     !e.target.photo2.value ? null : photos.push(e.target.photo2.value)
     !e.target.photo3.value ? null : photos.push(e.target.photo3.value)
@@ -41,14 +46,25 @@ function HouseCreate() {
     !e.target.photo9.value ? null : photos.push(e.target.photo9.value)
     setValue('photos', photos)
 
-    let response = await axios.post('http://localhost:4000/houses', newListing)
-    console.log(response)
+    if (
+      newListing.title &&
+      newListing.description &&
+      newListing.rooms &&
+      newListing.location &&
+      newListing.price &&
+      newListing.photos[0]
+    ) {
+      let response = await axios.post(
+        'http://localhost:4000/houses',
+        newListing
+      )
 
-    // axios.post('/user/listings', newListing).then(function (response) {
-    //   console.log(response)}).catch(function (error) {
-    //     console.log(error);
-    //   }
-    // )
+      if (response.data.message && response.data.message == 'House listed!') {
+        navigate('/profile')
+      }
+    } else {
+      console.log('House not listed')
+    }
   }
 
   return (
@@ -78,17 +94,12 @@ function HouseCreate() {
 
         <div className="mb-3">
           <h5>Location</h5>
-          <select
+          <textarea
+            type="text"
+            rows="1"
+            className="form-control"
             name="location"
-            className="form-select"
-            id="inputGroupSelect01"
-            defaultValue={0}
-          >
-            <option value="0">Choose...</option>
-            <option value="Koh Phangan">Koh Phangan</option>
-            <option value="Koh Samui">Koh Samui</option>
-            <option value="Bali">Bali</option>
-          </select>
+          ></textarea>
         </div>
 
         <div className="mb-3">
