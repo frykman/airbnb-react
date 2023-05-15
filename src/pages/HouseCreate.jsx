@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { API_URL } from '../api.js'
 
 axios.defaults.withCredentials = true
 
@@ -54,10 +55,7 @@ function HouseCreate() {
       newListing.price &&
       newListing.photos[0]
     ) {
-      let response = await axios.post(
-        'http://localhost:4000/houses',
-        newListing
-      )
+      let response = await axios.post(`${API_URL}/houses`, newListing)
 
       if (response.data.message && response.data.message == 'House listed!') {
         navigate('/profile')

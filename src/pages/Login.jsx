@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { API_URL } from '../api.js'
 
 axios.defaults.withCredentials = true
 
@@ -40,7 +41,7 @@ function Login() {
     setValue('email', validatedEmail)
     setValue('password', e.target.password.value)
 
-    let response = await axios.post('http://localhost:4000/login', userObj)
+    let response = await axios.post(`${API_URL}/login`, userObj)
     console.log(response.data)
     if (response.data.message === 'Login success') {
       navigate('/')

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import moment from 'moment/moment'
+import { API_URL } from '../api.js'
 
 function Reviews(props) {
   //States
@@ -9,12 +10,12 @@ function Reviews(props) {
   const [currentUser, setCurrentUser] = useState(0)
 
   const getCurrentUser = async () => {
-    let user = await axios.get('http://localhost:4000/profile')
+    let user = await axios.get(`${API_URL}/profile`)
     setCurrentUser(user.data)
   }
 
   const getReviews = async () => {
-    let response = await axios.get('http://localhost:4000/reviews', {
+    let response = await axios.get(`${API_URL}/reviews`, {
       params: { house: props.houseid },
     })
     setReviews(response.data.reviews)
@@ -35,7 +36,7 @@ function Reviews(props) {
       : setValue('description', e.target.description.value)
     setValue('house', props.houseid)
 
-    await axios.post('http://localhost:4000/reviews', review)
+    await axios.post(`${API_URL}/reviews`, review)
     getReviews()
   }
 

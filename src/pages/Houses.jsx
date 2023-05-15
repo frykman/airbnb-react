@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { API_URL } from '../api.js'
 
 function Houses() {
   let [houses, setHouses] = useState([])
 
   useEffect(() => {
     const getHouses = async () => {
-      let response = await axios.get('http://localhost:4000/houses', {
+      let response = await axios.get(`${API_URL}/houses`, {
         params: {
           rooms: '0',
           pricesort: 'ascending',
@@ -32,7 +33,7 @@ function Houses() {
     setValue('pricesort', e.target.pricesort.value)
     !e.target.title.value ? null : setValue('title', e.target.title.value)
 
-    let response = await axios.get('http://localhost:4000/houses', {
+    let response = await axios.get(`${API_URL}/houses`, {
       params: searchQueryObj,
     })
     console.log(searchQueryObj)

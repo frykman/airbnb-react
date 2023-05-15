@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { API_URL } from '../api.js'
 
 function Booking(props) {
   //States
@@ -13,19 +14,19 @@ function Booking(props) {
 
   //Methods
   const getCurrentUser = async () => {
-    let user = await axios.get('http://localhost:4000/profile')
+    let user = await axios.get(`${API_URL}/profile`)
     setCurrentUser(user.data)
   }
 
   const getBookings = async () => {
-    let response = await axios.get('http://localhost:4000/bookings', {
+    let response = await axios.get(`${API_URL}/bookings`, {
       params: { house: props.houseid },
     })
     response.data.message == 'booked' ? setBooked(true) : null
   }
 
   const getReviews = async () => {
-    let response = await axios.get('http://localhost:4000/reviews', {
+    let response = await axios.get(`${API_URL}/reviews`, {
       params: { house: props.houseid },
     })
     setReviews(response.data.reviews)
@@ -41,7 +42,7 @@ function Booking(props) {
     if (e.target.booking.value.length > 20) {
       setValue('description', e.target.booking.value)
       setValue('house', props.houseid)
-      await axios.post('http://localhost:4000/bookings', bookingObj)
+      await axios.post(`${API_URL}/bookings`, bookingObj)
     }
     getBookings()
     console.log(ratingTotal)

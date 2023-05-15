@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import '../styles/Nav.css'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import { API_URL } from '../api.js'
 
 export default function Nav() {
   // States
@@ -9,12 +10,12 @@ export default function Nav() {
 
   // Methods
   const getCurrentUser = async () => {
-    let user = await axios.get('http://localhost:4000/profile')
+    let user = await axios.get(`${API_URL}/profile`)
     setCurrentUser(user.data)
   }
 
   const logout = async (e) => {
-    let response = await axios.get('http://localhost:4000/logout')
+    let response = await axios.get(`${API_URL}/logout`)
     console.log(response.data)
   }
 

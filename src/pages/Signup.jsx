@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { API_URL } from '../api.js'
 
 axios.defaults.withCredentials = true
 
@@ -46,8 +47,7 @@ function Signup() {
       ? console.log('Password must be over 8 characters')
       : setValue('password', e.target.password.value)
 
-    let response = await axios.post('http://localhost:4000/signup', userObj)
-    console.log(response)
+    let response = await axios.post(`${API_URL}/signup`, userObj)
 
     if (response.data.message === 'Signup success! You are now logged in.') {
       navigate('/')

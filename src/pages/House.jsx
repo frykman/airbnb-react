@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import Reviews from '../components/Reviews'
 import Booking from '../components/Booking'
 import axios from 'axios'
+import { API_URL } from '../api.js'
 
 function House() {
   const { id } = useParams()
@@ -11,7 +12,7 @@ function House() {
 
   useEffect(() => {
     const getHouse = async () => {
-      let response = await axios.get(`http://localhost:4000/houses/${id}`)
+      let response = await axios.get(`${API_URL}/houses/${id}`)
       setHouse(response.data)
       setSelectedPhoto(response.data.photos[0])
     }

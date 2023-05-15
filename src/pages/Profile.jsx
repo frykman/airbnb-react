@@ -1,11 +1,12 @@
 import Listings from '../components/Listings'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { API_URL } from '../api.js'
 
 function Profile() {
   useEffect(() => {
     const getProfile = async () => {
-      let response = await axios.get('http://localhost:4000/profile')
+      let response = await axios.get(`${API_URL}/profile`)
       setUser(response.data)
     }
     getProfile()
@@ -21,7 +22,7 @@ function Profile() {
     setValue('name', e.target.name.value)
     setValue('email', e.target.email.value)
     setValue('avatar', e.target.avatar.value)
-    await axios.patch('http://localhost:4000/profile', user)
+    await axios.patch(`${API_URL}/profile`, user)
   }
 
   return (

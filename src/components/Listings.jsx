@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { API_URL } from '../api.js'
 
 function Listings() {
   useEffect(() => {
     const getListings = async () => {
-      let response = await axios.get('http://localhost:4000/listings')
+      let response = await axios.get(`${API_URL}/listings`)
       setHouseListings(response.data)
       console.log(response.data)
     }
