@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import '../styles/Nav.css'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { API_URL } from '../api.js'
@@ -30,7 +29,7 @@ export default function Nav() {
       <div className="container pb-2">
         <nav className="navbar navbar-light">
           <div className="col-1">
-            <Link to="/">
+            <Link onClick={() => window.location.reload()} to="/">
               <img
                 src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1642399114/portal/web%20development%20beginners/05%20Project%20Airbnb/assets/logo-airbnb.png
             "

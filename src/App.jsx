@@ -26,14 +26,6 @@ function App() {
           <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
-
-      {/* <Routes>
-        <Route element={<WithoutNav />}>
-          <Route path="/login" element={<LoginPage />} />
-        </Route>
-          <Route path="/=example" element={<Example />} />
-        </Route>
-      </Routes> */}
     </BrowserRouter>
   )
 }
