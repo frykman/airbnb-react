@@ -2,25 +2,16 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { API_URL } from '../api.js'
+import loadinganimation from '../img/my-loader.svg'
 
 function Houses() {
   let [houses, setHouses] = useState([])
 
-  useEffect(() => {
-    const getHouses = async () => {
-      let response = await axios.get(`${API_URL}/houses`, {
-        params: {
-          rooms: '0',
-          pricesort: 'ascending',
-        },
-      })
-      setHouses(response.data)
-    }
-    getHouses()
-  }, [])
+  const [loading, setLoading] = useState(true)
 
   const sendForm = async (e) => {
     e.preventDefault()
+
     let searchQueryObj = {}
     const setValue = (str, val) => {
       searchQueryObj[str] = val
@@ -36,9 +27,25 @@ function Houses() {
     let response = await axios.get(`${API_URL}/houses`, {
       params: searchQueryObj,
     })
+    setLoading(false)
+
     console.log(searchQueryObj)
     setHouses(response.data)
   }
+
+  useEffect(() => {
+    const getHouses = async () => {
+      let response = await axios.get(`${API_URL}/houses`, {
+        params: {
+          rooms: '0',
+          pricesort: 'ascending',
+        },
+      })
+      setLoading(false)
+      setHouses(response.data)
+    }
+    getHouses()
+  }, [])
 
   return (
     <>
@@ -130,20 +137,26 @@ function Houses() {
       {/* HOUSES CARDS */}
 
       <div className="container pt-5">
+        {loading && (
+          <div className="m-5 p-5 loading">
+            <img src={loadinganimation} alt="loading" />
+          </div>
+        )}
         <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
           {!houses && (
             <div>
               <h4>No results</h4>
             </div>
           )}
+
           {houses &&
             houses.map((house, i) => (
-              <div className="col card" key={i}>
-                <div className="d-flex fill">
+              <div className="col card px-0" key={i}>
+                <div className="d-flex fill px-0">
                   <Link to={`/house/${house._id}`} className="stretched-link">
                     <img
                       src={house.photos[0]}
-                      className="card-img-top img-fluid object-fit-cover w-100 h-100"
+                      className="card-img-top img-fluid object-fit-cover h-100"
                       alt="House"
                     />
                   </Link>

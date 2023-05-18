@@ -30,10 +30,20 @@ code {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  height: 60%;
+  width: 100%;
 }
 
 .fill img {
-  flex-shrink: 0;
-  min-width: 100%;
-  min-height: 100%;
+  object-fit: cover;
+  width: 300px;
+  max-height: 160px;
+}
+
+.profile-image {
+  max-height: 300px;
+}
+
+.loading {
+  text-align: center;
 }

@@ -67,6 +67,16 @@ function HouseCreate() {
 
   return (
     <div className="container">
+      <div classname="">
+        <button
+          onClick={(e) => {
+            navigate(-1)
+          }}
+          className="btn btn-success m-3"
+        >
+          Back
+        </button>
+      </div>
       <form onSubmit={(e) => sendForm(e)}>
         <h1>List House</h1>
 

@@ -7,27 +7,12 @@ axios.defaults.withCredentials = true
 
 function Signup() {
   const navigate = useNavigate()
-  let [emailToValidate, setEmailToValidate] = useState('')
-
-  useEffect(() => {
-    if (validEmail(emailToValidate)) {
-      validatedEmail = emailToValidate
-      console.log('Valid email :-)')
-    } else console.log('Not valid email!')
-  }, [emailToValidate])
+  const [emailToValidate, setEmailToValidate] = useState('')
+  const [emailNotValidMessage, setEmailNotValidMessage] = useState('')
 
   let userObj = {}
 
   let validatedEmail = ''
-
-  const validEmail = (str) => {
-    if (!str.includes('@') && !str.includes('.')) return false
-    if (!str.split('@')[0].length) return false
-    if (!str.split('@')[1].includes('.')) return false
-    if (str.split('@')[1].split('.')[1].length < 2) return false
-    if (!str.split('@')[1].split('.')[0]) return false
-    return true
-  }
 
   const signupForm = async (e) => {
     e.preventDefault()
@@ -41,7 +26,8 @@ function Signup() {
       : setValue('name', e.target.name.value)
 
     !e.target.avatar.value ? null : setValue('avatar', e.target.avatar.value)
-    setValue('email', validatedEmail)
+
+    setValue('email', e.target.email.value)
 
     e.target.password.value < 8 // Make password validation
       ? console.log('Password must be over 8 characters')
@@ -71,17 +57,19 @@ function Signup() {
         <label>Profile Picture</label>
         <input name="avatar" type="text" className="form-control mb-3 w-100" />
         <label>Email</label>
-        <input
-          onKeyUp={(e) => setEmailToValidate(e.target.value)}
-          name="email"
-          type="email"
-          className="form-control mb-3 w-100"
-        />
+        <input name="email" type="email" className="form-control mb-3 w-100" />
         <label>Password</label>
         <input name="password" type="password" className="form-control mb-3" />
-        <button type="submit" className="d-block mb-3 btn btn-success">
-          Signup
-        </button>
+        <div>
+          <div className="d-flex justify-content-evenly">
+            <button type="submit" className="d-inline mb-3 btn btn-success ">
+              Signup
+            </button>
+          </div>
+          <div className="d-flex">
+            <h5 className="text-danger d-inline">{emailNotValidMessage}</h5>
+          </div>
+        </div>
         <span>Already have an account?</span>
         <Link to="/login" className="px-2 link-success text-decoration-none">
           Login

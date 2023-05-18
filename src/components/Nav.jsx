@@ -26,7 +26,7 @@ export default function Nav() {
   // JSX
   return (
     <>
-      <div className="container pb-2">
+      <div className="container py-2">
         <nav className="navbar navbar-light">
           <div className="col-1">
             <Link onClick={() => window.location.reload()} to="/">

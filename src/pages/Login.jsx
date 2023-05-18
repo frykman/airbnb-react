@@ -7,38 +7,17 @@ axios.defaults.withCredentials = true
 
 function Login() {
   const navigate = useNavigate()
-  let [emailToValidate, setEmailToValidate] = useState('')
 
   const [userExist, setUserExists] = useState(true)
 
-  useEffect(() => {
-    if (validEmail(emailToValidate)) {
-      validatedEmail = emailToValidate
-      console.log('Valid email :-)')
-    } else console.log('Not valid email!')
-  }, [emailToValidate])
-
-  useEffect(() => {}, [])
-
   let userObj = {}
-
-  let validatedEmail = ''
-
-  const validEmail = (str) => {
-    if (!str.includes('@') && !str.includes('.')) return false
-    if (!str.split('@')[0].length) return false
-    if (!str.split('@')[1].includes('.')) return false
-    if (str.split('@')[1].split('.')[1].length < 2) return false
-    if (!str.split('@')[1].split('.')[0]) return false
-    return true
-  }
 
   const loginForm = async (e) => {
     e.preventDefault()
     const setValue = (str, val) => {
       userObj[str] = val
     }
-    setValue('email', validatedEmail)
+    setValue('email', e.target.email.value)
     setValue('password', e.target.password.value)
 
     let response = await axios.post(`${API_URL}/login`, userObj)
@@ -66,7 +45,6 @@ function Login() {
             />
             <label>Email</label>
             <input
-              onKeyUp={(e) => setEmailToValidate(e.target.value)}
               name="email"
               type="email"
               className="form-control mb-3 w-100"

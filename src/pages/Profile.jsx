@@ -2,6 +2,7 @@ import Listings from '../components/Listings'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { API_URL } from '../api.js'
+import { useNavigate } from 'react-router-dom'
 
 function Profile() {
   useEffect(() => {
@@ -13,6 +14,8 @@ function Profile() {
   }, [])
 
   const [user, setUser] = useState({})
+
+  const navigate = useNavigate()
 
   const updateProfile = async (e) => {
     e.preventDefault()
@@ -28,6 +31,16 @@ function Profile() {
   return (
     // <!-- PROFILE/LISTINGS START -->
     <div className="container">
+      <div classname="">
+        <button
+          onClick={(e) => {
+            navigate(-1)
+          }}
+          className="btn btn-success m-3"
+        >
+          Back
+        </button>
+      </div>
       <div className="row row-cols-1 row-cols-md-2">
         {/* <!-- PROFILE --> */}
         <div className="col mb-3">
@@ -51,7 +64,7 @@ function Profile() {
             <label>Profile Picture</label>
             <img
               src={user.avatar}
-              className="rounded-circle d-block pt-3 pb-3"
+              className="profile-image rounded-circle d-block pt-3 pb-3"
             />
             <div className="input-group mb-3">
               <span className="input-group-text" id="basic-addon3">

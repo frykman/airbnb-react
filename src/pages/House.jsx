@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Reviews from '../components/Reviews'
 import Booking from '../components/Booking'
 import axios from 'axios'
@@ -9,6 +9,7 @@ function House() {
   const { id } = useParams()
   const [house, setHouse] = useState({})
   const [selectedPhoto, setSelectedPhoto] = useState()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getHouse = async () => {
@@ -20,8 +21,18 @@ function House() {
   }, [])
 
   return (
-    <>
+    <div className="container">
       {/* HOUSE IMAGE GRID START */}
+      <div classname="">
+        <button
+          onClick={(e) => {
+            navigate(-1)
+          }}
+          className="btn btn-success m-3"
+        >
+          Back
+        </button>
+      </div>
       <div className="container pt-3">
         <div className="container p-0 border border-1 pb-3">
           <div className="row row-cols-1 row-cols-sm-2 p-0">
@@ -72,7 +83,7 @@ function House() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
