@@ -143,7 +143,7 @@ function Houses() {
                   <Link to={`/house/${house._id}`} className="stretched-link">
                     <img
                       src={house.photos[0]}
-                      className="card-img-top img-fluid object-fit-fill"
+                      className="card-img-top img-fluid object-fit-cover w-100 h-100"
                       alt="House"
                     />
                   </Link>
