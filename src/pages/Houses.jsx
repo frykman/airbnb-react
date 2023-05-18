@@ -139,7 +139,7 @@ function Houses() {
           {houses &&
             houses.map((house, i) => (
               <div className="col card" key={i}>
-                <div className="mh-100">
+                <div className="d-flex fill">
                   <Link to={`/house/${house._id}`} className="stretched-link">
                     <img
                       src={house.photos[0]}

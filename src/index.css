@@ -25,3 +25,15 @@ code {
   background-size: cover;
   background-position: 0 0 0 200px;
 }
+
+.fill {
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.fill img {
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
